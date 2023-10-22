@@ -51,15 +51,22 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("User ID is %d", update.Message.From.UserId)
 	log.Printf("Chat ID is %d", update.Message.Chat.ChatId)
 
+	handleUserInput(update)
+
+}
+
+func handleUserInput(update *Update) {
+	var response string
+	var err error
 	if update.Message.Text == "/start" {
-		response, err := sendMessage(update.Message.Chat.ChatId, "Hello Welcome to Ryan's Chat Bot!")
+		response, err = sendMessage(update.Message.Chat.ChatId, "Hello Welcome to Ryan's Chat Bot!")
 		if err != nil {
 			log.Printf(err.Error())
 		} else {
 			log.Printf(response)
 		}
 	} else {
-		response, err := sendMessage(update.Message.Chat.ChatId, update.Message.Text)
+		response, err = sendMessage(update.Message.Chat.ChatId, update.Message.Text)
 		if err != nil {
 			log.Printf(err.Error())
 		} else {
