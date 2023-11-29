@@ -21,6 +21,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	var update, err = httpFunctions.DecodeRequest(r)
 	if err != nil {
 		log.Printf("could not decode update %s", err.Error())
+		w.WriteHeader(500)
 	}
 
 	log.Printf("Update Received")
